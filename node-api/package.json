@@ -1,0 +1,16 @@
+{
+  "name": "nodeapi",
+  "version": "1.0.0",
+  "description": "Maln-backend",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start":"nodemon app.js"
+  },
+  "author": "Tx10",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "nodemon": "^2.0.22"
+  }
+}
