@@ -9,7 +9,7 @@ import okhttp3.*
 import java.io.IOException
 
 
-class SignupScreen : AppCompatActivity() {
+class Signup_screen : AppCompatActivity() {
     private lateinit var binding: ActivitySignupScreenBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,8 +31,7 @@ class SignupScreen : AppCompatActivity() {
 
 
                 try {
-                           val success = createUser(uname,pass,name,lname)
-                    Log.d("test",success.toString())
+                    createUser(uname,pass,name,lname)
 
 
                 } catch (e: IOException) {
@@ -44,30 +43,32 @@ class SignupScreen : AppCompatActivity() {
             }
         }
 
-            finish()
 
         }
+    fun createUser(uname:String, pass:String, name:String, lname:String) {
+        val client = OkHttpClient()
+        val request: Request = Request.Builder()
+            .url("https://172.20.10.2:4000/signup?uname=$uname&pass=$pass&name=$name&lastname=$lname")
+            .build()
+        client.newCall(request).enqueue(object : Callback {
+            override fun onFailure(call: Call, e: IOException) {
+                call.cancel()
+            }
+
+            override fun onResponse(call: Call, response: Response) {
+
+                val myResponse = response.body!!.string()
+//                  if (myResponse == "sign up successfully"){
+//
+//                  }
+                Log.d("test",myResponse.toString())
+                if (myResponse.toString() == "sign up successfully"){
+                    this@Signup_screen.finish()
+                }
+            }
+
+        })
+
+    }
     }
 
-  fun createUser(uname:String, pass:String, name:String, lname:String) {
-    val client = OkHttpClient()
-    val request: Request = Request.Builder()
-        .url("https://172.20.10.2:4000/signup?uname=$uname&pass=$pass&name=$name&lastname=$lname")
-        .build()
-          client.newCall(request).enqueue(object : Callback {
-              override fun onFailure(call: Call, e: IOException) {
-                  call.cancel()
-              }
-
-              override fun onResponse(call: Call, response: Response) {
-
-                  val myResponse = response.body!!.string()
-                  if (myResponse == "sign up successfully"){
-
-                  }
-
-              }
-
-          })
-
-}
