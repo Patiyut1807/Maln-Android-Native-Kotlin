@@ -1,7 +1,7 @@
 import { MongoClient } from "mongodb";
 import { v4 as uuidv4 } from "uuid";
 const uri =
-  "mongodb+srv://64010479:Ten180745@malndb.vuerkny.mongodb.net/?retryWrites=true&w=majority";
+  "url ที่หายไป";
 let mongoClientConnect = async () => {
   const client = new MongoClient(uri);
   try {
